@@ -27,7 +27,7 @@ public class HighPassRLFilter extends AbstractRLFilter {
 		Complex zr;
 		Complex zrl;
 		
-		fc = r / (2 * Math.PI * l);
+		fcNoLoad = r / (2 * Math.PI * l);
 		
 		xl = Electrical.xl(f, l);
 		

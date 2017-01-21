@@ -26,15 +26,19 @@ public class LowPassRCFilter extends AbstractRCFilter{
 		
 		Complex zc;
 		Complex zr;
-		Complex zrl;
+		Complex zrl;		
+		double rth;
 		
-		fc = 1. / (2 * Math.PI * r * c);
+		fcNoLoad = 1. / (2 * Math.PI * r * c);
+		
+		rth = 1 / (1 / r + 1 / rl);		
+		fcWithLoad = 1. / (2 * Math.PI * rth * c);
 		
 		xc = Electrical.xc(f, c);
 		
-		zc = Complex.getComplexPol(xc, -90.);
-		zr = Complex.getComplexPol(r, 0.);
-		zrl = Complex.getComplexPol(rl, 0.);
+		zc = Electrical.zc(xc);
+		zr = Electrical.zr(r);
+		zrl = Electrical.zr(rl);
 		
 		z2 = Electrical.zParallel(zc, zrl);
 		zt = Electrical.zSeries(zr, z2);

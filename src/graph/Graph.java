@@ -41,7 +41,7 @@ public class Graph extends Canvas implements PaintListener, DisposeListener {
 	
 	private IGraphArea graphArea;
 	
-	private boolean showDot = true;
+	private boolean showDot = false;
 
 	public Graph(Composite parent, int style) {
 		
@@ -122,36 +122,45 @@ public class Graph extends Canvas implements PaintListener, DisposeListener {
 
 			int x = xCoordToXPos(graduation.getValue());			
 
-			e.gc.setForeground(COLOR_GRAY);
+			if(graduation.getLabel() != null){
+				e.gc.setForeground(COLOR_BLACK);
+				e.gc.drawText(graduation.getLabel(), x, topMargin + graphArea.getHeight() + 2, true);
+				e.gc.setForeground(COLOR_DARK_GRAY);
+			}
+			
+			else{
+				e.gc.setForeground(COLOR_GRAY);
+			}
+			
 			e.gc.drawLine(x, topMargin + graphArea.getHeight() + 2, x, topMargin);
 			
 			e.gc.setForeground(COLOR_BLACK);
-			e.gc.drawLine(x, topMargin + graphArea.getHeight() - 2, x, topMargin + graphArea.getHeight() + 2);
-			
-			if(graduation.getLabel() != null){
-				
-				e.gc.drawText(graduation.getLabel(), x, topMargin + graphArea.getHeight() + 2, true);
-			}			
+			e.gc.drawLine(x, topMargin + graphArea.getHeight() - 2, x, topMargin + graphArea.getHeight() + 2);		
 		}
 		
 		// Mon deuxième itérateur à vie, bravo Iouri
 		for(Graduation graduation : graphArea.getYAxisGraduationList()){
 			
-			int y = yCoordToYPos(graduation.getValue());			
-
-			e.gc.setForeground(COLOR_GRAY);
-			e.gc.drawLine(leftMargin + 2, y, leftMargin + graphArea.getWidth(), y);
-			
-			e.gc.setForeground(COLOR_BLACK);
-			e.gc.drawLine(leftMargin - 2, y, leftMargin + 2, y);
+			int y = yCoordToYPos(graduation.getValue());
 			
 			if(graduation.getLabel() != null){
 				
 				String label = graduation.getLabel();
 				Point labelDimension = e.gc.stringExtent(label);
 				
+				e.gc.setForeground(COLOR_BLACK);
 				e.gc.drawText(graduation.getLabel(), leftMargin - labelDimension.x -4 , y - labelDimension.y / 2 , true);
+				e.gc.setForeground(COLOR_DARK_GRAY);
 			}
+			
+			else{
+				e.gc.setForeground(COLOR_GRAY);
+			}
+
+			e.gc.drawLine(leftMargin + 2, y, leftMargin + graphArea.getWidth(), y);
+			
+			e.gc.setForeground(COLOR_BLACK);
+			e.gc.drawLine(leftMargin - 2, y, leftMargin + 2, y);
 		}
 		
 		
@@ -172,7 +181,7 @@ public class Graph extends Canvas implements PaintListener, DisposeListener {
 		// Dessin de la fonction		
 		if(serieList != null){			
 			
-			System.out.println("Il y a " + serieList.size() + " courbe(s) a tracer");
+			//System.out.println("Il y a " + serieList.size() + " courbe(s) a tracer");
 			
 			e.gc.setForeground(COLOR_RED);
 			e.gc.setLineWidth(2);
@@ -209,6 +218,8 @@ public class Graph extends Canvas implements PaintListener, DisposeListener {
 						previousCoord = currentCoord;
 					//}
 				}
+				
+				previousCoord = null;
 			}
 		}
 		

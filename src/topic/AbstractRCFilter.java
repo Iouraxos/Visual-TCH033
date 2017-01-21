@@ -28,6 +28,7 @@ import nonLinearScale.LogScale;
 import widget.E12Scale;
 import widget.EngineerNotationText;
 import widget.data.FilterBehavior;
+import widget.data.ImpedancePassFilter;
 import widget.data.PropertiesPassFilter;
 
 public abstract class AbstractRCFilter extends Composite implements SelectionListener {
@@ -42,9 +43,7 @@ public abstract class AbstractRCFilter extends Composite implements SelectionLis
 	private final E12Scale cScale;
 	private final E12Scale rlScale;
 	
-	private final EngineerNotationText xText;
-	private final EngineerNotationText ztText;
-	private final EngineerNotationText z2Text;
+	private final ImpedancePassFilter impedances;
 	
 	private final PropertiesPassFilter properties;
 	
@@ -58,7 +57,8 @@ public abstract class AbstractRCFilter extends Composite implements SelectionLis
 	protected double c = 180.e-9;
 	protected double rl = Double.POSITIVE_INFINITY;
 	
-	protected double fc;
+	protected double fcNoLoad;
+	protected double fcWithLoad;
 	protected double xc;
 	protected Complex z2;
 	protected Complex zt;
@@ -186,38 +186,7 @@ public abstract class AbstractRCFilter extends Composite implements SelectionLis
 		
 		// RESULT
 		
-		Group resultGroup = new Group(this, SWT.NONE);
-		
-		resultGroup.setText("Résultats");
-		resultGroup.setLayout(new GridLayout(3, true));
-		resultGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		
-		Label label;
-		
-		label = new Label(resultGroup, SWT.NONE);
-		label.setText("Xc");
-		label.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
-		
-		label = new Label(resultGroup, SWT.NONE);
-		label.setText("Z\u2082");
-		label.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
-		
-		label = new Label(resultGroup, SWT.NONE);
-		label.setText("Zt");
-		label.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
-		
-		xText = new EngineerNotationText(resultGroup, SWT.NONE);
-		xText.setUnit(Electrical.UNIT_OHM);
-		xText.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
-		
-		z2Text = new EngineerNotationText(resultGroup, SWT.NONE);
-		z2Text.setUnit(Electrical.UNIT_OHM);
-		z2Text.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
-		
-		ztText = new EngineerNotationText(resultGroup, SWT.NONE);
-		ztText.setUnit(Electrical.UNIT_OHM);
-		ztText.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
-		
+		impedances = new ImpedancePassFilter(this, SWT.NONE);		
 		filterBehavior = new FilterBehavior(this, SWT.NONE);
 		filterBehavior.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		
@@ -246,11 +215,12 @@ public abstract class AbstractRCFilter extends Composite implements SelectionLis
 		
 		sweep();
 		
-		properties.updateValues(fc);
+		properties.updateValues(fcNoLoad, fcWithLoad);
 		
 		List<Double> verticalBarList = new ArrayList<Double>();
 		verticalBarList.add(f);
-		verticalBarList.add(fc);
+		verticalBarList.add(fcNoLoad);
+		verticalBarList.add(fcWithLoad);
 		
 		List<Serie> serieList = new ArrayList<Serie>(1);
 		
@@ -277,11 +247,7 @@ public abstract class AbstractRCFilter extends Composite implements SelectionLis
 		
 		recalculate(f);
 		
-		
-		xText.setValue(xc);
-		ztText.setValue(zt);
-		z2Text.setValue(z2);
-
+		impedances.updateValues(xc, z2, zt);
 		filterBehavior.updateValues(a.abs(), adb, phi);
 	}
 	

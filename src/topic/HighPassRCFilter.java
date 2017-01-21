@@ -30,7 +30,12 @@ public class HighPassRCFilter extends AbstractRCFilter implements SelectionListe
 		Complex zr;
 		Complex zrl;
 		
-		fc = 1. / (2 * Math.PI * r * c);
+		double rth;
+		
+		fcNoLoad = 1. / (2 * Math.PI * r * c);
+		
+		rth = 1 / (1 / r + 1 / rl);		
+		fcWithLoad = 1. / (2 * Math.PI * rth * c);
 		
 		xc = Electrical.xc(f, c);
 		

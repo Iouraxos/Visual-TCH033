@@ -17,7 +17,8 @@ import widget.EngineerNotationText;
 
 public class PropertiesPassFilter extends Composite implements DisposeListener{
 	
-	private final EngineerNotationText fcText;
+	private final EngineerNotationText fcNoLoadText;
+	private final EngineerNotationText fcWithLoadText;
 	
 	private final Font dataFont;
 
@@ -34,30 +35,40 @@ public class PropertiesPassFilter extends Composite implements DisposeListener{
 		Composite composite;
 		
 		composite = new Composite(group, SWT.NONE);
-		composite.setLayout(new GridLayout(3, true));
+		composite.setLayout(new GridLayout(2, true));
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
 		dataFont = loadFont();
 		
 		Label label;
 		
-		label = new Label(group, SWT.NONE);
-		label.setText("Fc");
+		label = new Label(composite, SWT.NONE);
+		label.setText("Fc sans charge");
 		label.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
 		
-		fcText = new EngineerNotationText(group, SWT.NONE);
-		fcText.setUnit(Electrical.UNIT_HERTZ);
-		fcText.setFont(dataFont);
-		fcText.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
+		label = new Label(composite, SWT.NONE);
+		label.setText("Fc avec charge");
+		label.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
 		
-		updateValues(0);
+		fcNoLoadText = new EngineerNotationText(composite, SWT.NONE);
+		fcNoLoadText.setUnit(Electrical.UNIT_HERTZ);
+		fcNoLoadText.setFont(dataFont);
+		fcNoLoadText.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
+		
+		fcWithLoadText = new EngineerNotationText(composite, SWT.NONE);
+		fcWithLoadText.setUnit(Electrical.UNIT_HERTZ);
+		fcWithLoadText.setFont(dataFont);
+		fcWithLoadText.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, true, false));
+		
+		updateValues(0, 0);
 		
 		this.addDisposeListener(this);
 	}
 	
-	public void updateValues(double fc){
+	public void updateValues(double fcNoLoad, double fcWithLoad){
 		
-		fcText.setValue(fc);
+		fcNoLoadText.setValue(fcNoLoad);
+		fcWithLoadText.setValue(fcWithLoad);
 	}
 	
 	private Font loadFont(){

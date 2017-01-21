@@ -58,7 +58,8 @@ public abstract class AbstractRLFilter extends Composite implements SelectionLis
 	protected double l = 10.0e-3;
 	protected double rl = Double.POSITIVE_INFINITY;
 	
-	protected double fc;
+	protected double fcNoLoad;
+	protected double fcWithLoad;
 	protected double xl;
 	protected Complex z2;
 	protected Complex zt;
@@ -244,11 +245,12 @@ public abstract class AbstractRLFilter extends Composite implements SelectionLis
 		
 		sweep();
 		
-		properties.updateValues(fc);
+		properties.updateValues(fcNoLoad, fcWithLoad);
 		
 		List<Double> verticalBarList = new ArrayList<Double>();
 		verticalBarList.add(f);
-		verticalBarList.add(fc);
+		verticalBarList.add(fcNoLoad);
+		verticalBarList.add(fcWithLoad);
 		
 		List<Serie> serieList = new ArrayList<Serie>(1);
 		

@@ -50,57 +50,57 @@ public class View implements Observer, SelectionListener, DisposeListener {
 		
 		TabItem[] tabItemArray = new TabItem[8];
 		
-		tabItemArray[0] = new TabItem(tabFolder, SWT.NONE);
-		tabItemArray[0].setText("Intégrateur RC");
-		tabItemArray[0].setControl(new IntegratorRC(tabFolder, SWT.NONE));
-		
-//		// Tab 1
-//		
 //		tabItemArray[0] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[0].setText("Filtre passe bas RC");
-//		tabItemArray[0].setControl(new LowPassRCFilter(tabFolder, SWT.NONE));
-//		
-//		// Tab 2
-//
-//		tabItemArray[1] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[1].setText("Filtre passe haut RC");
-//		tabItemArray[1].setControl(new HighPassRCFilter(tabFolder, SWT.NONE));
-//		
-//		// Tab 3
-//		
-//		tabItemArray[2] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[2].setText("Filtre passe bas RL");
-//		tabItemArray[2].setControl(new LowPassRLFilter(tabFolder, SWT.NONE));
-//		
-//		// Tab 4
-//		
-//		tabItemArray[3] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[3].setText("Filtre haut bas RL");
-//		tabItemArray[3].setControl(new HighPassRLFilter(tabFolder, SWT.NONE));
-//		
-//		// Tab 5
-//		
-//		tabItemArray[4] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[4].setText("Filtre passe bande série");
-//		tabItemArray[4].setControl(new BandPassSeries(tabFolder, SWT.NONE));
-//		
-//		// Tab 6
-//		
-//		tabItemArray[5] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[5].setText("Filtre coupe bande série");
-//		tabItemArray[5].setControl(new BandStopSeries(tabFolder, SWT.NONE));
-//		
-//		// Tab 7
-//		
-//		tabItemArray[6] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[6].setText("Filtre passe bande RLC");
-//		tabItemArray[6].setControl(new BandPassParallel(tabFolder, SWT.NONE));
-//		
-//		// Tab 8
-//		
-//		tabItemArray[7] = new TabItem(tabFolder, SWT.NONE);
-//		tabItemArray[7].setText("Filtre passe bande RLC");
-//		tabItemArray[7].setControl(new BandStopParallel(tabFolder, SWT.NONE));
+//		tabItemArray[0].setText("Intégrateur RC");
+//		tabItemArray[0].setControl(new IntegratorRC(tabFolder, SWT.NONE));
+		
+		// Tab 1
+		
+		tabItemArray[0] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[0].setText("Filtre passe bas RC");
+		tabItemArray[0].setControl(new LowPassRCFilter(tabFolder, SWT.NONE));
+		
+		// Tab 2
+
+		tabItemArray[1] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[1].setText("Filtre passe haut RC");
+		tabItemArray[1].setControl(new HighPassRCFilter(tabFolder, SWT.NONE));
+		
+		// Tab 3
+		
+		tabItemArray[2] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[2].setText("Filtre passe bas RL");
+		tabItemArray[2].setControl(new LowPassRLFilter(tabFolder, SWT.NONE));
+		
+		// Tab 4
+		
+		tabItemArray[3] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[3].setText("Filtre haut bas RL");
+		tabItemArray[3].setControl(new HighPassRLFilter(tabFolder, SWT.NONE));
+		
+		// Tab 5
+		
+		tabItemArray[4] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[4].setText("Filtre passe bande série");
+		tabItemArray[4].setControl(new BandPassSeries(tabFolder, SWT.NONE));
+		
+		// Tab 6
+		
+		tabItemArray[5] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[5].setText("Filtre coupe bande série");
+		tabItemArray[5].setControl(new BandStopSeries(tabFolder, SWT.NONE));
+		
+		// Tab 7
+		
+		tabItemArray[6] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[6].setText("Filtre passe bande RLC");
+		tabItemArray[6].setControl(new BandPassParallel(tabFolder, SWT.NONE));
+		
+		// Tab 8
+		
+		tabItemArray[7] = new TabItem(tabFolder, SWT.NONE);
+		tabItemArray[7].setText("Filtre passe bande RLC");
+		tabItemArray[7].setControl(new BandStopParallel(tabFolder, SWT.NONE));
 		
 		
 		// SHELL STUFF		

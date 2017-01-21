@@ -23,7 +23,7 @@ public class LinearGraphArea extends AbstractGraphArea {
 		yAxisGraduationList = linearGraduationList(yAxisMin, yAxisMax);
 	}
 	
-	// Graduation logarithmique entre 1 et xAxisMAx
+	// Graduation linaire entre axisMin et axisMax
 	private static List<Graduation> linearGraduationList(double axisMin, double axisMax){
 		
 		List<Graduation> graduationList = new ArrayList<Graduation>();
@@ -37,7 +37,7 @@ public class LinearGraphArea extends AbstractGraphArea {
 		double roundedPower = Math.round(Math.log10(axisSpan));
 		
 		double corseIncrement = Math.pow(10., roundedPower) / 10.;
-		double fineIncrement = corseIncrement / 10.;
+		double fineIncrement = corseIncrement / 5.;
 		
 		//System.out.println("corseIncrement : " + corseIncrement);
 		

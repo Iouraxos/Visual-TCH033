@@ -151,7 +151,7 @@ public class Electrical {
 			angleAsString = String.format("%03.1f", c.angle());			
 		}
 		
-		return "( " + magnitudeAsString + " \u2220 " + angleAsString + "° )";
+		return "(" + magnitudeAsString + "\u2220" + angleAsString + "°)";
 	}
 	
 	
